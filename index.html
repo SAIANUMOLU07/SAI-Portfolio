@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sai Anumolu - Best of the Best Animated Portfolio</title>
+    <meta
+      name="description"
+      content="Sai Anumolu's Portfolio - Computer Science Engineer & AI Enthusiast"
+    />
+    <meta
+      name="keywords"
+      content="Sai Anumolu, Portfolio, Computer Science, AI, Python, Web Development"
+    />
+    <meta name="author" content="Sai Anumolu" />
+    <meta property="og:title" content="Sai Anumolu - Portfolio" />
+    <meta
+      property="og:description"
+      content="Sai Anumolu's Portfolio - Computer Science Engineer & AI Enthusiast"
+    />
+    <meta
+      property="og:image"
+      content="https://via.placeholder.com/1200x630?text=Sai+Anumolu+Portfolio"
+    />
+    <meta property="og:url" content="https://your-portfolio-url.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://via.placeholder.com/32?text=SA"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+      :root {
+        --primary: #6c63ff;
+        --secondary: #ff6584;
+        --dark: #0a0a0a;
+        --light: #f8f9ff;
+        --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        line-height: 1.6;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        position: relative;
+        animation: gradientShift 15s infinite alternate;
+      }
+
+      body.dark-mode {
+        background: radial-gradient(circle at center, #2a2a2a 0%, #0a0a0a 100%);
+        color: var(--light);
+      }
+
+      body.light-mode {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e0e7ff 100%);
+        background-size: 200% 200%;
+        color: #333;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      body.dark-mode::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Ccircle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)" /%3E%3Ccircle cx="50" cy="20" r="2" fill="rgba(255,255,255,0.05)" /%3E%3Ccircle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)" /%3E%3C/svg%3E')
+          repeat;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      #loading-spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+
+      .custom-loader {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary);
+        animation: pulse 1.5s infinite ease-in-out;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      header {
+        background-color: rgba(30, 41, 59, 0.95);
+        color: white;
+        text-align: center;
+        padding: 6rem 2rem;
+        position: relative;
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+      }
+
+      header.loaded {
+        animation: fadeInZoom 1.2s ease-in-out forwards;
+      }
+
+      @keyframes fadeInZoom {
+        from {
+          opacity: 0;
+          transform: scale(0.9) translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .theme-toggle {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        padding: 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+        color: white;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .theme-toggle:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      header p {
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+
+      .download-resume {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1.5rem;
+        border: 2px solid white;
+      }
+
+      .download-resume:hover {
+        background: white;
+        color: var(--primary);
+        transform: scale(1.05);
+      }
+
+      nav {
+        background-color: #1f2937;
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      body.light-mode nav {
+        background-color: #e0e7ff;
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        list-style: none;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem;
+        display: inline-block;
+      }
+
+      body.light-mode nav a {
+        color: #333;
+      }
+
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      nav a.active {
+        background: var(--primary);
+        border-radius: 25px;
+        color: white;
+      }
+
+      nav a:focus,
+      .download-resume:focus,
+      .view-certificate:focus,
+      button:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: none;
+        opacity: 0;
+      }
+
+      section.active {
+        display: block;
+        opacity: 1;
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 4rem;
+        font-size: 2.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .skills-grid,
+      .project-grid,
+      .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .skill-card,
+      .project-card,
+      .certification-card {
+        background: rgba(31, 41, 55, 0.9);
+        padding: 2.5rem;
+        border-radius: 15px;
+        text-align: center;
+      }
+
+      body.light-mode .skill-card,
+      body.light-mode .project-card,
+      body.light-mode .certification-card {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+      }
+
+      .skill-card:hover,
+      .project-card:hover,
+      .certification-card:hover {
+        box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+        border: 1px solid var(--primary);
+      }
+
+      .skill-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+      }
+
+      .project-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .skill-card p,
+      .project-card p,
+      .certification-card p {
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+
+      .progress-bar {
+        background: #374151;
+        border-radius: 10px;
+        height: 12px;
+        margin-top: 1.5rem;
+      }
+
+      body.light-mode .progress-bar {
+        background: #d1d5db;
+      }
+
+      .progress {
+        background: var(--gradient);
+        height: 100%;
+        border-radius: 10px;
+        width: 0;
+        transition: width 1.2s ease-out;
+      }
+
+      .experience-item {
+        border-left: 4px solid var(--primary);
+        padding-left: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      body.light-mode .modal {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        background: rgba(31, 41, 55, 0.95);
+        padding: 3rem;
+        border-radius: 15px;
+        max-width: 700px;
+        width: 90%;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      body.light-mode .modal-content {
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+      }
+
+      .close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 2rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: white;
+      }
+
+      body.light-mode .close {
+        color: #333;
+      }
+
+      #certifications {
+        background: rgba(31, 41, 55, 0.9);
+        padding: 6rem 2rem;
+      }
+
+      body.light-mode #certifications {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .certifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .certification-card {
+        background: rgba(31, 41, 55, 0.8);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      body.light-mode .certification-card {
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+      }
+
+      .certification-card img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: contain;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .certification-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .certification-card p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .view-certificate {
+        background: var(--gradient);
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: auto;
+      }
+
+      .contact-form {
+        width: 100%;
+        max-width: 600px;
+        background: rgba(31, 41, 55, 0.95);
+        padding: 3rem;
+        border-radius: 15px;
+        margin: 0 auto;
+      }
+
+      body.light-mode .contact-form {
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 1.2rem;
+        border-radius: 10px;
+        border: 2px solid #374151;
+        background: #2d3748;
+        color: #fff;
+        margin-bottom: 2rem;
+      }
+
+      body.light-mode form input,
+      body.light-mode form textarea {
+        border: 2px solid #d1d5db;
+        background: #fff;
+        color: #333;
+      }
+
+      form button {
+        background: var(--gradient);
+        color: white;
+        padding: 1.2rem 2.5rem;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        padding: 3rem;
+        background: rgba(31, 41, 55, 0.9);
+      }
+
+      body.light-mode footer {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      footer a {
+        color: white;
+        font-size: 1.8rem;
+        margin: 0 1.5rem;
+        display: inline-block;
+      }
+
+      body.light-mode footer a {
+        color: #333;
+      }
+
+      #back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 1.2rem;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        header,
+        section {
+          padding: 3rem 1rem;
+        }
+        header {
+          padding: 3rem 1rem;
+        }
+        header h1 {
+          font-size: 2rem;
+        }
+        .download-resume {
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+        }
+        .skills-grid,
+        .project-grid,
+        .certifications-grid {
+          grid-template-columns: 1fr;
+        }
+        header p {
+          font-size: 1.2rem;
+        }
+        .certification-card img {
+          max-height: 150px;
+        }
+      }
+    </style>
+  </head>
+  <body class="dark-mode">
+    <div id="loading-spinner">
+      <div class="custom-loader">SA</div>
+    </div>
+
+    <header>
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+      <h1>SAI ANUMOLU</h1>
+      <p>Computer Science Engineer & AI Enthusiast</p>
+      <a
+        href="https://drive.google.com/uc?export=download&id=1b0EoH-k9_bGeRN-kDRpe4KhjGKipG_9R"
+        download="Sai_Anumolu_Resume.pdf"
+        class="download-resume"
+      >
+        <i class="fas fa-download"></i> Download Resume
+      </a>
+    </header>
+
+    <nav>
+      <ul>
+        <li>
+          <a href="#skills" class="nav-link active"
+            ><i class="fas fa-code"></i> Skills 🛠️</a
+          >
+        </li>
+        <li>
+          <a href="#experience" class="nav-link"
+            ><i class="fas fa-briefcase"></i> Experience 💼</a
+          >
+        </li>
+        <li>
+          <a href="#projects" class="nav-link"
+            ><i class="fas fa-project-diagram"></i> Projects 🚀</a
+          >
+        </li>
+        <li>
+          <a href="#certifications" class="nav-link"
+            ><i class="fas fa-award"></i> Certifications 🏆</a
+          >
+        </li>
+        <li>
+          <a href="#contact" class="nav-link"
+            ><i class="fas fa-envelope"></i> Contact 📧</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <section id="skills" class="active">
+      <h2 class="section-title">Technical Skills 🛠️</h2>
+      <div class="skills-grid">
+        <div class="skill-card" style="--progress-width: 90%">
+          <div class="skill-icon"><i class="fab fa-python"></i></div>
+          <h3>Python</h3>
+          <p>
+            Proficient in Python for scripting, automation, and machine
+            learning.
+          </p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 90%"></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--progress-width: 85%">
+          <div class="skill-icon"><i class="fas fa-database"></i></div>
+          <h3>Databases</h3>
+          <p>Experience with MySQL and SQL Server for data management.</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--progress-width: 80%">
+          <div class="skill-icon"><i class="fab fa-html5"></i></div>
+          <h3>Web Development</h3>
+          <p>
+            Skilled in HTML, CSS, and JavaScript for building responsive
+            websites.
+          </p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 80%"></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--progress-width: 75%">
+          <div class="skill-icon"><i class="fas fa-robot"></i></div>
+          <h3>AI/ML</h3>
+          <p>Familiar with GPT-3 and prompt engineering for AI applications.</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--progress-width: 95%">
+          <div class="skill-icon"><i class="fas fa-tools"></i></div>
+          <h3>Tools</h3>
+          <p>Proficient in Git, GitHub, and Visual Studio Code.</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 95%"></div>
+          </div>
+        </div>
+        <div class="skill-card" style="--progress-width: 70%">
+          <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Data Analysis</h3>
+          <p>Experience with Power BI and Excel for data visualization.</p>
+          <div class="progress-bar">
+            <div class="progress" style="width: 70%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-title">Experience 💼</h2>
+      <div class="experience-item">
+        <h3>Software Development Intern</h3>
+        <p>Zemoso Technologies | Aug 2024 - Sep 2024</p>
+        <ul style="margin-top: 1rem; padding-left: 1.5rem">
+          <li>Implemented version control with Git/GitHub</li>
+          <li>Developed front-end components using HTML/CSS</li>
+          <li>Built Python scripts for web solutions</li>
+          <li>Applied Agile methodologies</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects 🚀</h2>
+      <div class="project-grid">
+        <div class="project-card" onclick="openModal('smart-agri-modal')">
+          <svg
+            class="project-icon"
+            width="50"
+            height="50"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 17H2V19H4V17ZM20 17H6V19H20V17ZM8 14H18V16H8V14ZM16 8H14V12H16V8ZM12 8H10V12H12V8ZM6 8H8V12H6V8ZM20 5H4V7H20V5ZM16 2H14V4H16V2ZM12 2H10V4H12V2ZM8 2H6V4H8V2Z"
+              fill="#6C63FF"
+            />
+            <circle cx="18" cy="18" r="2" fill="#FF6584" />
+          </svg>
+          <h3>Smart Agriculture IoT System</h3>
+          <p>Arduino Uno | Sensor Integration | Data Analysis</p>
+        </div>
+        <div
+          class="project-card"
+          onclick="openModal('placement-predictor-modal')"
+        >
+          <svg
+            class="project-icon"
+            width="50"
+            height="50"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L2 7L12 12L22 7L12 2ZM2 7V15L12 20L22 15V7"
+              fill="#6C63FF"
+            />
+            <path d="M10 15H14V17H10V15Z" fill="#FF6584" />
+            <circle cx="12" cy="14" r="1" fill="#FFFFFF" />
+          </svg>
+          <h3>Campus Placement Predictor</h3>
+          <p>Machine Learning | Python | MySQL</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="smart-agri-modal" class="modal">
+      <div class="modal-content">
+        <button class="close">×</button>
+        <h2>Smart Agriculture IoT System</h2>
+        <p><strong>📌 Overview:</strong></p>
+        <p>
+          A smart agriculture system leveraging
+          <strong>IoT (Internet of Things)</strong> to enhance farming
+          efficiency by monitoring soil conditions, weather, and crop health in
+          real-time.
+        </p>
+        <p><strong>📌 Features:</strong></p>
+        <ul>
+          <li>✅Soil Moisture Monitoring</li>
+          <li>✅Temperature & Humidity Sensing</li>
+          <li>✅Automated Irrigation System</li>
+          <li>✅Real-time Data Analytics</li>
+          <li>✅Mobile Alerts & Notifications</li>
+        </ul>
+        <p><strong>📌 Technologies Used:</strong></p>
+        <ul>
+          <li>
+            <strong>Hardware:</strong> Arduino/Raspberry Pi, DHT11, Soil
+            Moisture Sensor
+          </li>
+          <li><strong>Software:</strong> Python, MQTT Protocol, Firebase</li>
+        </ul>
+        <p>
+          <strong>📌 GitHub:</strong>
+          <a href="https://github.com/SAIANUMOLU07">Click Here</a>
+        </p>
+      </div>
+    </div>
+
+    <div id="placement-predictor-modal" class="modal">
+      <div class="modal-content">
+        <button class="close">×</button>
+        <h2>Campus Placement Prediction & Analysis</h2>
+        <p><strong>📌 Overview:</strong></p>
+        <p>
+          This project uses machine learning to predict campus placement
+          outcomes based on academic performance, skills, and trends.
+        </p>
+        <p><strong>📌 Features:</strong></p>
+        <ul>
+          <li>✅Data Collection</li>
+          <li>✅Data Preprocessing</li>
+          <li>✅Machine Learning Model</li>
+          <li>✅Prediction & Analysis</li>
+          <li>✅Data Visualization</li>
+        </ul>
+        <p><strong>📌 Technologies Used:</strong></p>
+        <ul>
+          <li><strong>Programming:</strong> Python</li>
+          <li><strong>Libraries:</strong> scikit-learn, pandas, numpy</li>
+        </ul>
+        <p>
+          <strong>📌 GitHub:</strong>
+          <a href="https://github.com/SAIANUMOLU07">Click Here</a>
+        </p>
+      </div>
+    </div>
+
+    <section id="certifications">
+      <h2 class="section-title">Certifications 🏆</h2>
+      <div class="certifications-grid">
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=12-N2h3vt868tr3lSGHwlcuqUubVZaNdy"
+            alt="Microsoft Python MTA Certificate"
+          />
+          <h3>Microsoft Python MTA</h3>
+          <p>Issued by Microsoft | 2022</p>
+          <a
+            href="https://drive.google.com/file/d/12-N2h3vt868tr3lSGHwlcuqUubVZaNdy/view?usp=sharing"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1SwN6INkrUusVAnXE9c5bXG1En91sy34U"
+            alt="Azure Fundamentals Certificate"
+          />
+          <h3>Azure Fundamentals</h3>
+          <p>Issued by Microsoft | 2022</p>
+          <a
+            href="https://drive.google.com/file/d/1SwN6INkrUusVAnXE9c5bXG1En91sy34U/view?usp=drive_link"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1zyUP_WvsS-8NwuCT4FCi-ApcU2lgqeEV"
+            alt="Cisco Python Certificate"
+          />
+          <h3>Cisco Python</h3>
+          <p>Issued by Cisco | 2023</p>
+          <a
+            href="https://drive.google.com/file/d/1zyUP_WvsS-8NwuCT4FCi-ApcU2lgqeEV/view?usp=drive_link"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1pPZKRuslss-2mbeOzW_le6j56C9aotar"
+            alt="ChatGPT Prompt Engineering Certificate"
+          />
+          <h3>ChatGPT Prompt Engineering</h3>
+          <p>Issued by OpenAI | 2023</p>
+          <a
+            href="https://drive.google.com/file/d/1pPZKRuslss-2mbeOzW_le6j56C9aotar/view?usp=sharing"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1EGOLCuyrBzEoK5q8QXudPQ480g5godqo"
+            alt="Python for Data Analysis Certificate"
+          />
+          <h3>Python for Data Analysis</h3>
+          <p>Issued by Great Learning | 2024</p>
+          <a
+            href="https://drive.google.com/file/d/1EGOLCuyrBzEoK5q8QXudPQ480g5godqo/view?usp=sharing"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1qoCXx6WQHAy2ujQk1D6MGQrXd5Lp7Hxp"
+            alt="AI&ML Certificate"
+          />
+          <h3>AI&ML</h3>
+          <p>Issued by SETWIN | 2023</p>
+          <a
+            href="https://drive.google.com/file/d/1qoCXx6WQHAy2ujQk1D6MGQrXd5Lp7Hxp/view?usp=drive_link"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1-0IzO03KF722Qz_OpUKH3T-3Rz1EYxeq"
+            alt="Machine Learning Certificate"
+          />
+          <h3>Machine Learning</h3>
+          <p>Issued by Bharat Intern | 2023</p>
+          <a
+            href="https://drive.google.com/file/d/1-0IzO03KF722Qz_OpUKH3T-3Rz1EYxeq/view?usp=drive_link"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+        <div class="certification-card">
+          <img
+            src="https://drive.google.com/thumbnail?id=1jzcPLR0ltpBC6C8jIJX_O6vEQvsNhCY7"
+            alt="FIGMA Certificate"
+          />
+          <h3>FIGMA</h3>
+          <p>Issued by Coursera | 2024</p>
+          <a
+            href="https://drive.google.com/file/d/1jzcPLR0ltpBC6C8jIJX_O6vEQvsNhCY7/view?usp=sharing"
+            target="_blank"
+            class="view-certificate"
+            >View Certificate</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact Me 📧</h2>
+      <div class="contact-form">
+        <form
+          id="contact-form"
+          action="https://formsubmit.co/saianumolu63@gmail.com"
+          method="POST"
+        >
+          <input
+            type="hidden"
+            name="_subject"
+            value="New Contact Form Submission from Portfolio"
+          />
+          <input
+            type="hidden"
+            name="_next"
+            value="https://your-portfolio-url.com/thank-you.html"
+          />
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea
+            rows="5"
+            name="message"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          margin-bottom: 2rem;
+        "
+      >
+        <a href="https://www.linkedin.com/in/sai-anumolu/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://github.com/SAIANUMOLU07" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
+      <p>© 2024 Sai Anumolu. All rights reserved.</p>
+    </footer>
+
+    <button id="back-to-top" title="Go to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      // Loading Spinner and Header Animation
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("loading-spinner").style.opacity = "0";
+          setTimeout(
+            () =>
+              (document.getElementById("loading-spinner").style.display =
+                "none"),
+            300
+          );
+        }, 500);
+        document.querySelector("header").classList.add("loaded");
+      });
+
+      // Animation Function
+      function animate(element, keyframes, duration) {
+        let start = null;
+        const originalTransform = element.style.transform || "";
+        function step(timestamp) {
+          if (!start) start = timestamp;
+          const progress = (timestamp - start) / duration;
+          if (progress < 1) {
+            const frame = keyframes(progress);
+            element.style.transform = `${originalTransform} ${
+              frame.transform || ""
+            }`;
+            element.style.opacity =
+              frame.opacity !== undefined
+                ? frame.opacity
+                : element.style.opacity;
+            element.style.width = frame.width || element.style.width;
+            requestAnimationFrame(step);
+          } else {
+            const finalFrame = keyframes(1);
+            element.style.transform = `${originalTransform} ${
+              finalFrame.transform || ""
+            }`;
+            element.style.opacity =
+              finalFrame.opacity !== undefined
+                ? finalFrame.opacity
+                : element.style.opacity;
+            element.style.width = finalFrame.width || element.style.width;
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      // Section Toggle with Title Animation
+      function showSection(sectionId) {
+        document
+          .querySelectorAll("section")
+          .forEach((section) => section.classList.remove("active"));
+        document
+          .querySelectorAll("nav a")
+          .forEach((link) => link.classList.remove("active"));
+        const targetSection = document.getElementById(sectionId);
+        targetSection.classList.add("active");
+        document
+          .querySelector(`nav a[href="#${sectionId}"]`)
+          .classList.add("active");
+        window.scrollTo({
+          top: targetSection.offsetTop - 70,
+          behavior: "smooth",
+        });
+        const title = targetSection.querySelector(".section-title");
+        animate(
+          title,
+          (t) => ({
+            opacity: t,
+            transform: `translateY(${20 * (1 - t)}px) scale(${
+              1 + 0.1 * Math.sin(Math.PI * t)
+            })`,
+          }),
+          800
+        );
+        if (sectionId === "skills") {
+          document.querySelectorAll(".progress").forEach((bar) => {
+            const width =
+              bar.parentElement.parentElement.style.getPropertyValue(
+                "--progress-width"
+              );
+            animate(bar, (t) => ({ width: `${parseFloat(width) * t}%` }), 1200);
+          });
+        }
+      }
+
+      // Theme Toggle Animation (Coin Flip)
+      document
+        .querySelector(".theme-toggle")
+        .addEventListener("click", function () {
+          toggleTheme();
+          animate(
+            this,
+            (t) => ({
+              transform: `rotateY(${360 * t}deg) scale(${
+                1 + 0.1 * Math.sin(Math.PI * t)
+              })`,
+              opacity: 0.5 + 0.5 * Math.sin(Math.PI * t),
+            }),
+            600
+          );
+        });
+
+      function toggleTheme() {
+        const body = document.body;
+        if (body.classList.contains("dark-mode")) {
+          body.classList.remove("dark-mode");
+          body.classList.add("light-mode");
+          document.querySelector(".theme-toggle i").classList.remove("fa-moon");
+          document.querySelector(".theme-toggle i").classList.add("fa-sun");
+        } else {
+          body.classList.remove("light-mode");
+          body.classList.add("dark-mode");
+          document.querySelector(".theme-toggle i").classList.remove("fa-sun");
+          document.querySelector(".theme-toggle i").classList.add("fa-moon");
+        }
+      }
+
+      // Download Resume Animation
+      document
+        .querySelector(".download-resume")
+        .addEventListener("click", function () {
+          animate(
+            this,
+            (t) => ({
+              transform: `scale(${1 - 0.05 * Math.sin(Math.PI * t)})`,
+            }),
+            500
+          );
+        });
+
+      // Navigation Links Animation
+      document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const sectionId = this.getAttribute("href").substring(1);
+          showSection(sectionId);
+          animate(
+            this,
+            (t) => ({
+              transform: `scale(${1 + 0.1 * Math.sin(Math.PI * t)})`,
+            }),
+            300
+          );
+        });
+      });
+
+      // Back to Top Animation (Flip)
+      const backToTop = document.getElementById("back-to-top");
+      let backToTopVisible = false;
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300 && !backToTopVisible) {
+          backToTop.style.display = "block";
+          animate(
+            backToTop,
+            (t) => ({
+              opacity: t,
+              transform: `translateY(${20 * (1 - t)}px)`,
+            }),
+            500
+          );
+          backToTopVisible = true;
+        } else if (window.scrollY <= 300 && backToTopVisible) {
+          animate(
+            backToTop,
+            (t) => ({
+              opacity: 1 - t,
+              transform: `translateY(${20 * t}px)`,
+            }),
+            300
+          );
+          setTimeout(() => (backToTop.style.display = "none"), 300);
+          backToTopVisible = false;
+        }
+      });
+
+      backToTop.addEventListener("click", () => {
+        animate(
+          backToTop,
+          (t) => ({
+            transform: `rotateX(${360 * t}deg) scale(${
+              1 + 0.1 * Math.sin(Math.PI * t)
+            })`,
+          }),
+          300
+        );
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Modal Functions with Animation
+      function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = "flex";
+        animate(
+          modal.querySelector(".modal-content"),
+          (t) => ({
+            opacity: t,
+            transform: `scale(${0.8 + 0.2 * t})`,
+          }),
+          500
+        );
+      }
+
+      function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        animate(
+          modal.querySelector(".modal-content"),
+          (t) => ({
+            opacity: 1 - t,
+            transform: `scale(${1 - 0.2 * t})`,
+          }),
+          500
+        );
+        setTimeout(() => (modal.style.display = "none"), 500);
+      }
+
+      document.querySelectorAll(".close").forEach((button) => {
+        button.addEventListener("click", function () {
+          const modalId = this.parentElement.parentElement.id;
+          animate(
+            this,
+            (t) => ({
+              transform: `rotate(${90 * t}deg) scale(${
+                1 + 0.2 * Math.sin(Math.PI * t)
+              })`,
+            }),
+            300
+          );
+          closeModal(modalId);
+        });
+      });
+
+      // View Certificate Animation
+      document.querySelectorAll(".view-certificate").forEach((button) => {
+        button.addEventListener("click", function () {
+          animate(
+            this,
+            (t) => ({
+              transform: `scale(${1 + 0.1 * Math.sin(Math.PI * t)})`,
+            }),
+            500
+          );
+        });
+      });
+
+      // Form Submit Animation and Confetti
+      document
+        .querySelector("form button")
+        .addEventListener("click", function () {
+          animate(
+            this,
+            (t) => ({
+              transform: `scale(${1 - 0.05 * Math.sin(Math.PI * t)})`,
+            }),
+            500
+          );
+        });
+
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (e) {
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#6C63FF", "#FF6584", "#FFFFFF"],
+          });
+        });
+    </script>
+  </body>
+</html>
